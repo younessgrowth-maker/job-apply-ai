@@ -1,11 +1,28 @@
-"""Client centralisé pour l'API Claude (Anthropic)."""
+"""Client centralisé pour l'API Claude (Anthropic).
+
+Supporte deux modes :
+- API directe Anthropic (ANTHROPIC_API_KEY requise)
+- Claude Max Proxy local (utilise l'abonnement Max via claude-code-proxy)
+"""
 
 import anthropic
-from core.config import ANTHROPIC_API_KEY, LLM_MODEL, LLM_MAX_TOKENS
+from core.config import (
+    ANTHROPIC_API_KEY, LLM_MODEL, LLM_MAX_TOKENS,
+    USE_CLAUDE_PROXY, CLAUDE_PROXY_URL,
+)
 
 
 def get_client() -> anthropic.Anthropic:
-    """Retourne un client Anthropic configuré."""
+    """Retourne un client Anthropic configuré.
+
+    Si USE_CLAUDE_PROXY=true, utilise le proxy local (pas besoin de clé API).
+    Sinon, utilise l'API Anthropic directe.
+    """
+    if USE_CLAUDE_PROXY:
+        return anthropic.Anthropic(
+            api_key="max-proxy",
+            base_url=CLAUDE_PROXY_URL,
+        )
     if not ANTHROPIC_API_KEY:
         raise RuntimeError(
             "ANTHROPIC_API_KEY manquante. "

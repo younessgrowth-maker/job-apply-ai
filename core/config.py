@@ -16,6 +16,10 @@ UPLOADS_DIR.mkdir(exist_ok=True)
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY", "")
 
+# Claude Max Proxy
+USE_CLAUDE_PROXY = os.getenv("USE_CLAUDE_PROXY", "false").lower() == "true"
+CLAUDE_PROXY_URL = os.getenv("CLAUDE_PROXY_URL", "http://127.0.0.1:4523")
+
 # Base de données
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'job_apply.db'}")
 

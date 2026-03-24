@@ -52,7 +52,7 @@ class JobOffer(BaseModel):
     source: str = ""
     contract_type: str = ""
     salary: str = ""
-    match_score: float = Field(default=0.0, ge=0, le=1)
+    match_score: float = Field(default=0.0, ge=0, le=100, description="Score de pertinence 0-100")
     scraped_at: datetime = Field(default_factory=datetime.now)
 
 
