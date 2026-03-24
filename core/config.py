@@ -27,5 +27,11 @@ DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'job_apply.db'}
 LLM_MODEL = "claude-sonnet-4-20250514"
 LLM_MAX_TOKENS = 4096
 
+# Email SMTP (Gmail)
+SMTP_EMAIL = os.getenv("SMTP_EMAIL", "")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
+SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+
 # Logging
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
